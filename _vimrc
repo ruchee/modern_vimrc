@@ -240,6 +240,7 @@ function! PackInit() abort
     call minpac#add('prabirshrestha/asyncomplete.vim')
     call minpac#add('prabirshrestha/asyncomplete-lsp.vim')
 
+    call minpac#add('fatih/vim-go')
     call minpac#add('vlime/vlime')
     call minpac#add('stephpy/vim-php-cs-fixer')
     call minpac#add('tpope/vim-rvm')
@@ -250,6 +251,7 @@ function! PackInit() abort
     call minpac#add('sunaku/vim-ruby-minitest')
     call minpac#add('Quramy/tsuquyomi')
     call minpac#add('chemzqm/wxapp.vim')
+    call minpac#add('theniceboy/vim-gitignore')
 endfunction
 
 command! PackUpdate call PackInit() | call minpac#update()
