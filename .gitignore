@@ -1,0 +1,15 @@
+/vimfiles/pack/minpac/start
+
+/vim7*
+/vim8*
+/vim9*
+/*.vim
+
+tags
+tags-*
+
+Thumbs.db
+.DS_Store
+*.pyc
+*.cache
+*.swp

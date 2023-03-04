@@ -1,0 +1,222 @@
+snippet #       可执行标识
+	#!/usr/bin/env swift
+	${0}
+snippet /       单行注释
+	// ${0}
+snippet //      多行注释
+	/* ${0}*/
+snippet -       分隔注释
+	//----------------------------------------------------------------------${0}
+# 包含指令
+snippet im      导入模块
+	import ${0}
+# 模块、类
+snippet cl      类
+	class ${1} {
+	    ${0}
+	}
+snippet cle     类继承
+	class ${1}: ${2} {
+	    ${0}
+	}
+snippet str     结构体
+	struct ${1} {
+	    ${0}
+	}
+snippet enu     枚举
+	enum ${1} {
+	    ${0}
+	}
+snippet pro     协议
+	protocol ${1} {
+	    ${0}
+	}
+snippet ext     扩展功能
+	extension ${1} {
+	    ${0}
+	}
+# 函数/方法
+snippet f       函数
+	func ${1}(${2})${3} {
+	    ${0}
+	}
+snippet ff      函数原型
+	(${1}) -> ${0}
+snippet fff     闭包
+	(${1}) -> ${2} in
+	${0}
+snippet fi      构造函数
+	init (${1}) {
+	    ${0}
+	}
+snippet fd      析构函数
+	deinit {
+	    ${0}
+	}
+snippet fg      属性getter方法
+	get {
+	    ${0}
+	}
+snippet fs      属性setter方法
+	set {
+	    ${0}
+	}
+snippet fws     属性设置新值之前运行 [与 get 和 set 不能共存]
+	willSet {
+	    ${0}
+	}
+snippet fds     属性设置新值之后运行 [与 get 和 set 不能共存]
+	didSet {
+	    ${0}
+	}
+# 流程控制
+snippet if      if
+	if ${1} {
+	    ${0}
+	}
+snippet ifc     if case
+	if case ${1} {
+	    ${0}
+	}
+snippet ifl     if let
+	if let ${1} {
+	    ${0}
+	}
+snippet elif    else if
+	else if ${1} {
+	    ${0}
+	}
+snippet el      else
+	else {
+	    ${0}
+	}
+snippet fo      for
+	for ${1} {
+	    ${0}
+	}
+snippet foi     for .. in
+	for ${1} in ${2} {
+	    ${0}
+	}
+snippet wh      while
+	while ${1} {
+	    ${0}
+	}
+snippet rep     repeat .. while
+	repeat {
+	    ${0}
+	} while ${1}
+snippet sw      switch
+	switch ${1} {
+	    ${0}
+	}
+snippet cs      case
+	case ${1}:
+	    ${0}
+snippet def     default
+	default:
+	    ${0}
+snippet fa      继续匹配
+	fallthrough${0}
+# 异常处理
+snippet thr     抛出异常
+	throw ${0}
+snippet do      异常处理块
+	do {
+	    ${0}
+	}
+snippet try     捕获异常
+	try ${0}
+snippet cat     处理异常
+	catch${1} {
+	    ${0}
+	}
+snippet df      无论怎样都会执行
+	defer {
+	    ${0}
+	}
+# 单个关键字
+snippet pu      公共
+	public ${0}
+snippet pr      私有
+	private ${0}
+snippet gu      guard
+	guard ${0}
+snippet s       self
+	self${0}
+snippet v       定义变量
+	var ${0}
+snippet l       定义常量
+	let ${0}
+snippet w       条件匹配
+	where ${0}
+snippet re      返回
+	return ${0}
+snippet co      继续
+	continue${0}
+snippet br      中断
+	break${0}
+snippet su      调用父类的方法
+	super${0}
+snippet sui     调用父类的构造方法
+	super.init(${0})
+snippet ov      重写父类的方法
+	override ${0}
+snippet nv      newValue
+	newValue${0}
+snippet rv      rawValue
+	rawValue${0}
+snippet mu      标记可变
+	mutating ${0}
+snippet in      标记指针
+	indirect ${0}
+# 特殊常量
+# 数据类型
+snippet _i      Int
+	Int${0}
+snippet _i8     Int8
+	Int8${0}
+snippet _i1     Int16
+	Int16${0}
+snippet _i3     Int32
+	Int32${0}
+snippet _i6     Int64
+	Int64${0}
+snippet _u      UInt
+	UInt${0}
+snippet _u8     UInt8
+	UInt8${0}
+snippet _u1     UInt16
+	UInt16${0}
+snippet _u3     UInt32
+	UInt32${0}
+snippet _u6     UInt64
+	UInt64${0}
+snippet _f      Float
+	Float${0}
+snippet _d      Double
+	Double${0}
+snippet _c      Character
+	Character${0}
+snippet _s      String
+	String${0}
+snippet _b      Bool
+	Bool${0}
+snippet _e      Error
+	Error${0}
+snippet _ar     Array
+	Array<${0}>
+snippet _di     Dictionary
+	Dictionary<${1}, ${0}>
+snippet _se     Set
+	Set<${0}>
+# 输入输出
+snippet p       输出
+	print(${0})
+# 其他
+snippet ?       三元运算符
+	${1} ? ${2} : ${0};
+snippet <       { .. }
+	{ ${0} }
+snippet (       字符串内插
+	\(${0}
