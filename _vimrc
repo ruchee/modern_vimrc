@@ -1,6 +1,6 @@
 " -----------------  Author: Ruchee
 " -----------------   Email: my@ruchee.com
-" -----------------    Date: 2023-03-04 23:35:23
+" -----------------    Date: 2023-03-07 10:06:20
 " -----------------   https://github.com/ruchee/modern_vimrc
 
 
@@ -241,6 +241,7 @@ function! PackInit() abort
     call minpac#add('prabirshrestha/asyncomplete-lsp.vim')
 
     call minpac#add('fatih/vim-go')
+    call minpac#add('elixir-editors/vim-elixir')
     call minpac#add('vlime/vlime')
     call minpac#add('stephpy/vim-php-cs-fixer')
     call minpac#add('tpope/vim-rvm')
