@@ -1,6 +1,6 @@
 " -----------------  Author: Ruchee
 " -----------------   Email: my@ruchee.com
-" -----------------    Date: 2023-03-07 10:06:20
+" -----------------    Date: 2023-03-10 11:54:10
 " -----------------   https://github.com/ruchee/modern_vimrc
 
 
@@ -90,8 +90,9 @@
 " :%S/xx/yy/g                正则搜索替换 [PCRE 风格] [由 eregex 插件提供]
 "
 " Ctrl + P                   在当前工程目录搜索文件 [Normal 模式] [ctrlp 插件]
-" \ss                        在当前所在目录搜索单词 [Normal 模式] [ack 插件]
-" \ff                        搜索当前文件中的类、方法、函数名 [Normal 模式] [ctrlp-funky 插件]
+" \ff                        在普通文件夹搜索文件   [Normal 模式] [fzf 插件]
+" \gg                        在 Git 仓库搜索文件    [Normal 模式] [fzf 插件]
+" \tt                        在 Git 变更列表搜索    [Normal 模式] [fzf 插件]
 "
 " ---------- 跳转命令 ----------
 "
@@ -219,9 +220,9 @@ function! PackInit() abort
     call minpac#add('godlygeek/tabular')
 
     call minpac#add('othree/eregex.vim')
-    call minpac#add('mileszs/ack.vim')
     call minpac#add('ctrlpvim/ctrlp.vim')
-    call minpac#add('tacahiroy/ctrlp-funky')
+    call minpac#add('junegunn/fzf')
+    call minpac#add('junegunn/fzf.vim')
 
     call minpac#add('airblade/vim-gitgutter')
     call minpac#add('tpope/vim-fugitive')
@@ -540,13 +541,6 @@ let g:ctrlp_user_command  = {
             \ 'ignore': 1
             \ }                                " 特定项目使用 types 中指定的命令，非特定项目使用 fallback 中的命令，且启用自定义的忽略文件列表
 
-" ctrlp-funky         函数搜索
-let g:ctrlp_funky_matchtype        = 'path'    " 命中字符即时高亮
-let g:ctrlp_funky_syntax_highlight = 1         " 开启语法高亮
-
-" ack                 单词搜索                   需要安装 the_silver_searcher 配合使用
-let g:ackprg = 'ag --nogroup --nocolor --column'
-
 " indentLine          显示对齐线
 let g:indentLine_enabled    = 0                " 默认关闭
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']  " 设置对齐线字符，每个层级都可以不一样
@@ -685,11 +679,14 @@ nmap <leader>gd :Gdiff<cr>
 " \gl                 调用 Tig 查看提交日志 [tig-explorer 插件]
 nmap <leader>gl :TigOpenCurrentFile<cr>
 
-" \ss                 搜索当前光标下的单词 [ack 插件]
-nmap <leader>ss :Ack! '\b<c-r><c-w>\b'<cr>
+" \ff                 在普通文件夹搜索文件 [fzf 插件]
+nmap <leader>ff :Files<cr>
 
-" \ff                 搜索当前文件中的类、方法、函数名 [ctrlp-funky 插件]
-nmap <leader>ff :CtrlPFunky<cr>
+" \gg                 在 Git 仓库搜索文件 [fzf 插件]
+nmap <leader>gg :GFiles<cr>
+
+" \tt                 在 Git 变更列表搜索 [fzf 插件]
+nmap <leader>tt :GFiles?<cr>
 
 " \fc                 格式化当前文件的代码 [prettier 插件]
 nmap <leader>fc :PrettierAsync<cr>
