@@ -915,8 +915,8 @@ let g:vimwiki_list         = [blog]
 " ======= 额外的 TagBar 语言配置 ======= "
 
 let g:tagbar_type_elixir = {
-    \ 'ctagstype' : 'elixir',
-    \ 'kinds' : [
+    \ 'ctagstype': 'elixir',
+    \ 'kinds': [
         \ 'p:protocols',
         \ 'm:modules',
         \ 'e:exceptions',
@@ -931,16 +931,16 @@ let g:tagbar_type_elixir = {
         \ 'o:operators',
         \ 'r:records'
     \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 'p' : 'protocol',
-        \ 'm' : 'module'
+    \ 'sro': '.',
+    \ 'kind2scope': {
+        \ 'p': 'protocol',
+        \ 'm': 'module'
     \ },
-    \ 'scope2kind' : {
-        \ 'protocol' : 'p',
-        \ 'module' : 'm'
+    \ 'scope2kind': {
+        \ 'protocol': 'p',
+        \ 'module': 'm'
     \ },
-    \ 'sort' : 0
+    \ 'sort': 0
 \ }
 
 let g:tagbar_type_typescript = {
