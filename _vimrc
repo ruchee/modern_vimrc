@@ -40,10 +40,10 @@
 " \bb                        按 = 号对齐代码          [Normal 模式可用]
 " \bn                        自定义对齐               [Normal 模式可用]
 "
-" \cc                        添加行注释               [NERD_commenter]
-" \cm                        添加块注释               [NERD_commenter]
-" \cs                        添加 SexStyle 块注释     [NERD_commenter]
-" \cu                        取消注释                 [NERD_commenter]
+" \cc                        添加行注释               [NERD Commenter]
+" \cm                        添加块注释               [NERD Commenter]
+" \cs                        添加 SexStyle 块注释     [NERD Commenter]
+" \cu                        取消注释                 [NERD Commenter]
 "
 " \ev                        编辑当前所使用的 Vim 配置文件
 " \th                        一键生成与当前编辑文件同名的 HTML 文件 [不输出行号]
@@ -479,7 +479,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
             \ 'Unknown'   : '?'
             \ }                                " 为 NERDTree-Git-Plugin 设定各个状态对应的符号
 
-" NERDCommenter      注释处理插件
+" NERD Commenter      注释处理插件
 let g:NERDCreateDefaultMappings = 1            " 使用默认按键映射
 let g:NERDSpaceDelims = 1                      " 自动添加前置空格
 
