@@ -1,6 +1,6 @@
 " -----------------  Author: Ruchee
 " -----------------   Email: my@ruchee.com
-" -----------------    Date: 2023-03-10 11:54:10
+" -----------------    Date: 2023-03-11 13:07:11
 " -----------------   https://github.com/ruchee/modern_vimrc
 
 
@@ -53,7 +53,7 @@
 " ---------- 补全命令 ----------
 "
 " Ctrl + P                   缓冲区补全               [插入模式]
-" Ctrl + U                   全能补全                 [插入模式]
+" Ctrl + U                   调用 LSP 补全            [插入模式]
 " Tab键                      语法结构补全             [插入模式] [snipMate 插件]
 " Ctrl + Y + ,               HTML标签补全             [插入模式] [emmet 插件]
 
@@ -232,15 +232,16 @@ function! PackInit() abort
     call minpac#add('prettier/vim-prettier')
     call minpac#add('emmetio/emmet')
 
-    call minpac#add('garbas/vim-snipmate')
-    call minpac#add('vim-syntastic/syntastic')
     call minpac#add('sheerun/vim-polyglot')
+    call minpac#add('garbas/vim-snipmate')
+    call minpac#add('dense-analysis/ale')
 
     call minpac#add('prabirshrestha/vim-lsp')
     call minpac#add('mattn/vim-lsp-settings')
     call minpac#add('prabirshrestha/asyncomplete.vim')
     call minpac#add('prabirshrestha/asyncomplete-lsp.vim')
 
+    call minpac#add('rust-lang/rust.vim')
     call minpac#add('fatih/vim-go')
     call minpac#add('elixir-editors/vim-elixir')
     call minpac#add('vlime/vlime')
@@ -251,7 +252,6 @@ function! PackInit() abort
     call minpac#add('tpope/vim-rails')
     call minpac#add('jlcrochet/vim-rbs')
     call minpac#add('sunaku/vim-ruby-minitest')
-    call minpac#add('Quramy/tsuquyomi')
     call minpac#add('chemzqm/wxapp.vim')
     call minpac#add('theniceboy/vim-gitignore')
 endfunction
@@ -455,16 +455,70 @@ if has('python3')
     endif
 endif
 
-" tsuquyomi
-let g:tsuquyomi_disable_quickfix = 1           " 禁用 tsuquyomi 的报错窗口，改用 syntastic 的
-
 " BufExplorer         文件缓冲浏览器
 let g:bufExplorerSortBy = 'name'               " 按文件名排序
 
 " TagBar              tags 标签浏览器
-let g:tagbar_sort = 0                          " 关闭排序     [也就是按标签本身在文件中的位置排序]
-let g:tagbar_show_linenumbers = -1             " 显示行号     [使用全局关于行号的默认配置]
-let g:tagbar_autopreview = 0                   " 关闭自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口，需要时可以修改此处开启]
+let g:tagbar_sort = 0                          " 关闭排序
+let g:tagbar_show_linenumbers = -1             " 使用全局行号设置
+let g:tagbar_show_tag_linenumbers = 1          " 附带显示 tag 在文件中的行号
+let g:tagbar_autopreview = 0                   " 关闭顶部自动预览窗口
+
+" NERDTree            树形文件浏览器
+let g:NERDTreeShowHidden            = 1        " 显示隐藏文件   [NERDTree]
+let g:NERDTreeGitStatusShowIgnored  = 1        " 显示被忽略图标 [NERDTree-Git-Plugin]
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+            \ 'Modified'  : '✹',
+            \ 'Staged'    : '✚',
+            \ 'Untracked' : '✭',
+            \ 'Renamed'   : '➜',
+            \ 'Unmerged'  : '═',
+            \ 'Deleted'   : '✖',
+            \ 'Dirty'     : '✗',
+            \ 'Clean'     : '✔︎',
+            \ 'Unknown'   : '?'
+            \ }                                " 为 NERDTree-Git-Plugin 设定各个状态对应的符号
+
+" NERDCommenter      注释处理插件
+let g:NERDCreateDefaultMappings = 1            " 使用默认按键映射
+let g:NERDSpaceDelims = 1                      " 自动添加前置空格
+
+" eregex              PCRE 风格的搜索
+let g:eregex_forward_delim  = '//'             " 指定正向搜索按键
+let g:eregex_backward_delim = '??'             " 指定反向搜索按键
+
+" ctrlp               文件搜索
+let g:ctrlp_map = '<c-p>'                      " 指定触发按键
+let g:ctrlp_cmd = 'CtrlP'                      " 指定默认触发的搜索模式
+let g:ctrlp_use_caching   = 0                  " 不使用缓存
+" 指定自定义的忽略文件列表
+let g:ctrlp_custom_ignore = 'node_modules/\|vendor/\|git/\|svn/\|tmp/\|cache'
+let g:ctrlp_user_command  = {
+            \ 'types': {
+            \ 1: ['.git', 'cd %s && git ls-files -co --exclude-standard'],
+            \ },
+            \ 'fallback': 'find %s -type f',
+            \ 'ignore': 1
+            \ }                                " 特定项目使用 types 中指定的命令，非特定项目使用 fallback 中的命令，且启用自定义的忽略文件列表
+
+" indentLine          显示对齐线
+let g:indentLine_enabled    = 0                " 默认关闭
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']  " 设置对齐线字符，每个层级都可以不一样
+let g:indentLine_color_term = 239              " 设置非 GUI 线条颜色
+let g:indentLine_color_gui  = '#A4E57E'        " 设置 GUI 线条颜色
+
+" AirLine             彩色状态栏
+let g:airline_theme           = 'badwolf'      " 设置主题
+let g:airline_powerline_fonts = 0              " 关闭自定义字体
+
+" GitGutter           Git辅助插件
+let g:gitgutter_enabled               = 0      " 默认不开启
+let g:gitgutter_signs                 = 0      " 默认不开启提示
+let g:gitgutter_highlight_lines       = 0      " 默认不高亮行
+let g:gitgutter_sign_added            = '+'    " 自定义新增指示符
+let g:gitgutter_sign_modified         = '>'    " 自定义修改指示符
+let g:gitgutter_sign_removed          = '-'    " 自定义删除指示符
+let g:gitgutter_sign_modified_removed = '->'   " 自定义既修改又删除指示符
 
 " snipMate            Tab 智能补全
 let g:snips_author                              = 'Ruchee'
@@ -505,96 +559,32 @@ let g:snipMate.scope_aliases['html']            = 'tpl_*,html'
 let g:snipMate.scope_aliases['wxml']            = 'html,wxml'
 let g:snipMate.scope_aliases['wxss']            = 'css,wxss'
 
-" NERDTree            树形文件浏览器
-let g:NERDTreeShowHidden            = 1        " 显示隐藏文件   [NERDTree]
-let g:NERDTreeGitStatusShowIgnored  = 1        " 显示被忽略图标 [NERDTree-Git-Plugin]
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-            \ 'Modified'  : '✹',
-            \ 'Staged'    : '✚',
-            \ 'Untracked' : '✭',
-            \ 'Renamed'   : '➜',
-            \ 'Unmerged'  : '═',
-            \ 'Deleted'   : '✖',
-            \ 'Dirty'     : '✗',
-            \ 'Clean'     : '✔︎',
-            \ 'Unknown'   : '?'
-            \ }                                " 为 NERDTree-Git-Plugin 设定各个状态对应的符号
+" ALE                 语法检查
+let g:ale_disable_lsp = 1                      " 关闭 ALE 自带的 LSP
+let g:ale_linters_explicit = 1                 " 指示 ALE 只运行声明的 linter，而不是全部可用的 linter
+let g:ale_fix_on_save = 1                      " 在文件保存时自动执行 fixer
+let g:ale_virtualtext_cursor = 'disabled'      " 关闭虚拟报错文本
+let g:ale_linters = {
+            \ 'php': ['php'],
+            \ 'ruby': ['ruby'],
+            \ 'javascript': ['deno'],
+            \ 'typescript': ['deno'],
+            \ }
+let g:ale_fixers = {
+            \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \ 'javascript': ['prettier'],
+            \ 'typescript': ['prettier'],
+            \ }
 
-" NERD_commenter      注释处理插件
-let NERDSpaceDelims = 1                        " 自动添加前置空格
-
-" eregex              PCRE 风格的搜索
-let g:eregex_forward_delim  = '//'             " 指定正向搜索按键
-let g:eregex_backward_delim = '??'             " 指定反向搜索按键
-
-" ctrlp               文件搜索
-let g:ctrlp_map = '<c-p>'                      " 指定触发按键
-let g:ctrlp_cmd = 'CtrlP'                      " 指定默认触发的搜索模式
-let g:ctrlp_use_caching   = 0                  " 不使用缓存
-" 指定自定义的忽略文件列表
-let g:ctrlp_custom_ignore = 'node_modules/\|vendor/\|git/\|svn/\|tmp/\|cache'
-let g:ctrlp_user_command  = {
-            \ 'types': {
-            \ 1: ['.git', 'cd %s && git ls-files -co --exclude-standard'],
-            \ },
-            \ 'fallback': 'find %s -type f',
-            \ 'ignore': 1
-            \ }                                " 特定项目使用 types 中指定的命令，非特定项目使用 fallback 中的命令，且启用自定义的忽略文件列表
-
-" indentLine          显示对齐线
-let g:indentLine_enabled    = 0                " 默认关闭
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']  " 设置对齐线字符，每个层级都可以不一样
-let g:indentLine_color_term = 239              " 设置非 GUI 线条颜色
-let g:indentLine_color_gui  = '#A4E57E'        " 设置 GUI 线条颜色
-
-" AirLine             彩色状态栏
-let g:airline_theme           = 'badwolf'      " 设置主题
-let g:airline_powerline_fonts = 0              " 关闭自定义字体
-
-" GitGutter           Git辅助插件
-let g:gitgutter_enabled               = 0      " 默认不开启
-let g:gitgutter_signs                 = 0      " 默认不开启提示
-let g:gitgutter_highlight_lines       = 0      " 默认不高亮行
-let g:gitgutter_sign_added            = '+'    " 自定义新增指示符
-let g:gitgutter_sign_modified         = '>'    " 自定义修改指示符
-let g:gitgutter_sign_removed          = '-'    " 自定义删除指示符
-let g:gitgutter_sign_modified_removed = '->'   " 自定义既修改又删除指示符
-
-" Syntastic           语法检查
-let g:syntastic_check_on_open = 1              " 默认开启
-let g:syntastic_mode_map      = { 'mode': 'active', 'passive_filetypes': ['html', 'xhtml'] }
-" 自定义编译器和编译参数
-if g:isWIN
-    let g:syntastic_c_compiler   = 'gcc'
-    let g:syntastic_cpp_compiler = 'g++'
-else
-    let g:syntastic_c_compiler   = 'clang'
-    let g:syntastic_cpp_compiler = 'clang++'
-endif
-let g:syntastic_c_compiler_options           = '-Wall -std=c11'
-let g:syntastic_cpp_compiler_options         = '-Wall -std=c++17'
-let g:syntastic_swift_checkers               = ['swift', 'swiftpm', 'swiftlint']
-let g:syntastic_rust_checkers                = ['rustc']
-let g:syntastic_nim_checkers                 = ['nim']
-let g:syntastic_enable_nim_checker           = 1
-let g:syntastic_crystal_checkers             = ['crystal']
-let g:syntastic_enable_crystal_checker       = 1
-let g:syntastic_kotlin_checkers              = ['kotlinc']
-let g:syntastic_enable_kotlin_checker        = 1
-let g:syntastic_elixir_checkers              = ['elixir']
-let g:syntastic_enable_elixir_checker        = 1
-let g:syntastic_perl_checkers                = ['perl']
-let g:syntastic_enable_perl_checker          = 1
-let g:syntastic_perl6_checkers               = ['perl6']
-let g:syntastic_enable_perl6_checker         = 1
-let g:syntastic_python_python_exec           = 'python3'
-let g:syntastic_eruby_ruby_quiet_messages    = {'regex': 'possibly useless use of a variable in void context'}
-let g:syntastic_javascript_checkers          = ['eslint']
-let g:syntastic_typescript_checkers          = ['tsuquyomi']
-let g:syntastic_elm_checkers                 = ['elm_make']
-let g:syntastic_enable_racket_racket_checker = 1
-" 自定义指定后缀的文件不开启语法检查
-au BufRead,BufNewFile *.min.js exec ':SyntasticToggleMode'
+" LSP                 语义补全
+let g:lsp_diagnostics_enabled = 0
+let g:asyncomplete_auto_popup = 0
+let g:lsp_settings_filetype_elixir     = 'elixir-ls'
+let g:lsp_settings_filetype_php        = 'intelephense'
+let g:lsp_settings_filetype_python     = 'pylsp-all'
+let g:lsp_settings_filetype_ruby       = 'solargraph'
+let g:lsp_settings_filetype_javascript = 'deno'
+let g:lsp_settings_filetype_typescript = 'deno'
 
 " php-cs-fixer        格式化 PHP 代码
 let g:php_cs_fixer_rules = '@PSR2'                           " 指定默认的格式化规则
@@ -609,7 +599,7 @@ let g:rubycomplete_rails             = 1
 let g:rubycomplete_load_gemfile      = 1
 
 " prettier            格式化代码 [主要针对前端代码文件] [需要安装 prettier，可在 HOME 目录放置一个名为 .prettierrc.js 的配置文件做更全面的配置]
-let g:prettier#config#print_width = 100            " 单行最大字符数
+let g:prettier#config#print_width = 130            " 单行最大字符数
 let g:prettier#config#tab_width = 4                " 缩进空格的个数
 let g:prettier#config#semi = 'true'                " 语句末尾添加逗号
 
@@ -623,8 +613,8 @@ vmap <c-]> g<c-]>
 " Ctrl + T            跳回原位置
 nmap <c-t> :pop<cr>
 
-" Ctrl + U            简化全能补全按键
-imap <c-u> <c-x><c-o>
+" Ctrl + U            调用 LSP 补全
+imap <c-u> <Plug>(asyncomplete_force_refresh)
 
 " Ctrl + H            切换左窗口[Normal 模式]
 map <c-h> <c-w><c-h>
@@ -920,6 +910,58 @@ let blog.template_default  = 'code'
 let blog.template_ext      = '.html'
 let blog.auto_export       = 1
 let g:vimwiki_list         = [blog]
+
+
+" ======= 额外的 TagBar 语言配置 ======= "
+
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'kinds' : [
+        \ 'p:protocols',
+        \ 'm:modules',
+        \ 'e:exceptions',
+        \ 'g:guards',
+        \ 'y:types',
+        \ 'd:delegates',
+        \ 'f:functions',
+        \ 'c:callbacks',
+        \ 'a:macros',
+        \ 't:tests',
+        \ 'i:implementations',
+        \ 'o:operators',
+        \ 'r:records'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 'p' : 'protocol',
+        \ 'm' : 'module'
+    \ },
+    \ 'scope2kind' : {
+        \ 'protocol' : 'p',
+        \ 'module' : 'm'
+    \ },
+    \ 'sort' : 0
+\ }
+
+let g:tagbar_type_typescript = {
+    \ 'ctagstype': 'typescript',
+    \ 'kinds': [
+        \ 'n:namespaces',
+        \ 'i:interfaces',
+        \ 'c:classes',
+        \ 'g:enums',
+        \ 'e:enumerators',
+        \ 'm:methods',
+        \ 'f:functions',
+        \ 'z:function parameters',
+        \ 'p:properties',
+        \ 'v:variables',
+        \ 'l:local variables',
+        \ 'C:constants',
+        \ 'G:generators',
+        \ 'a:aliases',
+    \ ]
+\ }
 
 
 " ======= 加载自定义工程配置文件 ======= "
