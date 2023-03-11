@@ -1,6 +1,6 @@
 " -----------------  Author: Ruchee
 " -----------------   Email: my@ruchee.com
-" -----------------    Date: 2023-03-11 13:07:11
+" -----------------    Date: 2023-03-11 18:42:13
 " -----------------   https://github.com/ruchee/modern_vimrc
 
 
@@ -24,8 +24,9 @@
 " \ra                        一键清理当前代码文件     [Normal 模式可用]
 "
 " \nt                        打开 NERDTree 文件树窗口
-" \ut                        打开/关闭 Undotree 文档编辑历史窗口
 " \tl                        打开/关闭 Tags 窗口
+" \cw                        一键关闭左侧文件树和右侧 Tags 窗口
+" \ut                        打开/关闭 Undotree 文档编辑历史窗口
 " \fe                        打开/关闭文件编码窗口
 "
 " \be                        打开 BufExplorer 窗口    [独立显示] [Normal 模式可用]
@@ -458,11 +459,11 @@ endif
 " BufExplorer         文件缓冲浏览器
 let g:bufExplorerSortBy = 'name'               " 按文件名排序
 
-" TagBar              tags 标签浏览器
+" Tagbar              tags 标签浏览器
 let g:tagbar_sort = 0                          " 关闭排序
 let g:tagbar_show_linenumbers = -1             " 使用全局行号设置
 let g:tagbar_show_tag_linenumbers = 1          " 附带显示 tag 在文件中的行号
-let g:tagbar_autopreview = 0                   " 关闭顶部自动预览窗口
+let g:tagbar_autopreview = 1                   " 开启顶部自动预览窗口
 
 " NERDTree            树形文件浏览器
 let g:NERDTreeShowHidden            = 1        " 显示隐藏文件   [NERDTree]
@@ -562,13 +563,16 @@ let g:snipMate.scope_aliases['wxss']            = 'css,wxss'
 " ALE                 语法检查
 let g:ale_disable_lsp = 1                      " 关闭 ALE 自带的 LSP
 let g:ale_linters_explicit = 1                 " 指示 ALE 只运行声明的 linter，而不是全部可用的 linter
+let g:ale_virtualtext_cursor = 0               " 关闭虚拟报错文本
+let g:ale_lint_on_enter = 0                    " 阻止在键入的时候运行 linter
+let g:ale_lint_on_text_changed = 0             " 阻止在内容变更的时候运行 linter
+let g:ale_lint_on_save = 1                     " 在文件保存时自动执行 linter
 let g:ale_fix_on_save = 1                      " 在文件保存时自动执行 fixer
-let g:ale_virtualtext_cursor = 'disabled'      " 关闭虚拟报错文本
 let g:ale_linters = {
             \ 'php': ['php'],
             \ 'ruby': ['ruby'],
-            \ 'javascript': ['deno'],
-            \ 'typescript': ['deno'],
+            \ 'javascript': ['eslint'],
+            \ 'typescript': ['eslint'],
             \ }
 let g:ale_fixers = {
             \ '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -648,14 +652,17 @@ nmap <leader>bn :Tab /
 " \nt                 打开文件树窗口，在左侧栏显示 [NERDTree 插件]
 nmap <leader>nt :NERDTree<cr>
 
+" \tl                 打开/关闭 Tags 窗口，在右侧栏显示 [Tagbar 插件]
+nmap <leader>tl :TagbarToggle<cr><c-w><c-l>
+
+" \cw                 一键关闭左侧文件树和右侧 Tags 窗口
+nmap <leader>cw :NERDTreeClose<cr>:TagbarClose<cr>
+
 " \ut                 打开/关闭文档编辑历史窗口，在左侧栏显示 [Undotree 插件]
 nmap <leader>ut :UndotreeToggle<cr>
 
 " \il                 显示/关闭对齐线 [indentLine 插件]
 nmap <leader>il :IndentLinesToggle<cr>
-
-" \tl                 打开/关闭 Tags 窗口，在右侧栏显示 [Tagbar 插件]
-nmap <leader>tl :TagbarToggle<cr><c-w><c-l>
 
 " \fe                 打开文件编码窗口，在右侧栏显示 [FencView 插件]
 nmap <leader>fe :FencView<cr>
@@ -912,7 +919,7 @@ let blog.auto_export       = 1
 let g:vimwiki_list         = [blog]
 
 
-" ======= 额外的 TagBar 语言配置 ======= "
+" ======= 额外的 Tagbar 语言配置 ======= "
 
 let g:tagbar_type_elixir = {
     \ 'ctagstype': 'elixir',
@@ -939,8 +946,7 @@ let g:tagbar_type_elixir = {
     \ 'scope2kind': {
         \ 'protocol': 'p',
         \ 'module': 'm'
-    \ },
-    \ 'sort': 0
+    \ }
 \ }
 
 let g:tagbar_type_typescript = {
@@ -959,7 +965,7 @@ let g:tagbar_type_typescript = {
         \ 'l:local variables',
         \ 'C:constants',
         \ 'G:generators',
-        \ 'a:aliases',
+        \ 'a:aliases'
     \ ]
 \ }
 
