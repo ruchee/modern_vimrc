@@ -1,6 +1,6 @@
 " -----------------  Author: Ruchee
 " -----------------   Email: my@ruchee.com
-" -----------------    Date: 2023-03-11 18:42:13
+" -----------------    Date: 2023-03-12 20:54:59
 " -----------------   https://github.com/ruchee/modern_vimrc
 
 
@@ -569,21 +569,29 @@ let g:ale_lint_on_text_changed = 0             " 阻止在内容变更的时候�
 let g:ale_lint_on_save = 1                     " 在文件保存时自动执行 linter
 let g:ale_fix_on_save = 1                      " 在文件保存时自动执行 fixer
 let g:ale_linters = {
+            \ 'rust': ['rustc'],
+            \ 'go': ['gofmt'],
+            \ 'lua': ['luac'],
             \ 'php': ['php'],
+            \ 'python': ['pylint'],
             \ 'ruby': ['ruby'],
-            \ 'javascript': ['eslint'],
-            \ 'typescript': ['eslint'],
+            \ 'javascript': ['deno'],
+            \ 'typescript': ['deno'],
             \ }
 let g:ale_fixers = {
             \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \ 'php': ['php_cs_fixer'],
             \ 'javascript': ['prettier'],
             \ 'typescript': ['prettier'],
             \ }
+
+call ale#Set('php_cs_fixer_options', '--config='.$HOME.'/.php-cs-fixer.php')
 
 " LSP                 语义补全
 let g:lsp_diagnostics_enabled = 0
 let g:asyncomplete_auto_popup = 0
 let g:lsp_settings_filetype_elixir     = 'elixir-ls'
+let g:lsp_settings_filetype_lua        = 'emmylua-ls'
 let g:lsp_settings_filetype_php        = 'intelephense'
 let g:lsp_settings_filetype_python     = 'pylsp-all'
 let g:lsp_settings_filetype_ruby       = 'solargraph'
