@@ -1,6 +1,6 @@
 " -----------------  Author: Ruchee
 " -----------------   Email: my@ruchee.com
-" -----------------    Date: 2023-03-12 20:54:59
+" -----------------    Date: 2023-03-15 00:49:13
 " -----------------   https://github.com/ruchee/modern_vimrc
 
 
@@ -569,6 +569,8 @@ let g:ale_lint_on_text_changed = 0             " 阻止在内容变更的时候�
 let g:ale_lint_on_save = 1                     " 在文件保存时自动执行 linter
 let g:ale_fix_on_save = 1                      " 在文件保存时自动执行 fixer
 let g:ale_linters = {
+            \ 'c': ['cc'],
+            \ 'cpp': ['cc'],
             \ 'rust': ['rustc'],
             \ 'go': ['gofmt'],
             \ 'lua': ['luac'],
@@ -580,11 +582,14 @@ let g:ale_linters = {
             \ }
 let g:ale_fixers = {
             \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \ 'c': ['clang-format'],
+            \ 'cpp': ['clang-format'],
             \ 'php': ['php_cs_fixer'],
             \ 'javascript': ['prettier'],
             \ 'typescript': ['prettier'],
             \ }
 
+call ale#Set('c_clangformat_use_local_file', 1)
 call ale#Set('php_cs_fixer_options', '--config='.$HOME.'/.php-cs-fixer.php')
 
 " LSP                 语义补全
