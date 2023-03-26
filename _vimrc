@@ -1,6 +1,6 @@
 " -----------------  Author: Ruchee
 " -----------------   Email: my@ruchee.com
-" -----------------    Date: 2023-03-15 00:49:13
+" -----------------    Date: 2023-03-26 19:08:14
 " -----------------   https://github.com/ruchee/modern_vimrc
 
 
@@ -293,8 +293,8 @@ set tabstop=4
 au FileType scheme,racket,lisp,clojure,lfe,elixir,eelixir,ruby,eruby,coffee,slim,pug,scss set shiftwidth=2
 au FileType scheme,racket,lisp,clojure,lfe,elixir,eelixir,ruby,eruby,coffee,slim,pug,scss set tabstop=2
 
-" 配置 Rust 支持
-let g:rustfmt_autosave = 1  " 保存时自动格式化代码
+" 修正 Rust 语言的部分快捷键 [需要安装 rust-analyzer、rust-src 才能正常工作]
+au FileType rust nmap <c-[> :LspHover<cr>
 
 " 修正 Go 语言的部分快捷键 [需要安装一堆工具才能正常工作，可在 Vim 里面执行 :GoInstallBinaries 命令完成安装，需要翻墙才能安装成功]
 au FileType go nmap <c-[> :GoInfo<cr>
@@ -303,6 +303,8 @@ au FileType go nmap <c-t> <c-o>
 
 " 忽略 Go 插件的版本警告
 let g:go_version_warning = 0
+" 指定错误信息呈现的位置
+let g:go_list_type = "quickfix"
 
 " JSX 文件必须匹配完整的扩展名才以 JSX 语法渲染
 let g:jsx_ext_required = 1
@@ -584,6 +586,7 @@ let g:ale_fixers = {
             \ '*': ['remove_trailing_lines', 'trim_whitespace'],
             \ 'c': ['clang-format'],
             \ 'cpp': ['clang-format'],
+            \ 'rust': ['rustfmt'],
             \ 'php': ['php_cs_fixer'],
             \ 'javascript': ['prettier'],
             \ 'typescript': ['prettier'],
