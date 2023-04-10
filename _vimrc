@@ -1,6 +1,6 @@
 " -----------------  Author: Ruchee
 " -----------------   Email: my@ruchee.com
-" -----------------    Date: 2023-03-26 19:08:14
+" -----------------    Date: 2023-04-10 11:35:39
 " -----------------   https://github.com/ruchee/modern_vimrc
 
 
@@ -91,9 +91,11 @@
 " :%S/xx/yy/g                正则搜索替换 [PCRE 风格] [由 eregex 插件提供]
 "
 " Ctrl + P                   在当前工程目录搜索文件 [Normal 模式] [ctrlp 插件]
+" \ss                        搜索当前光标下的单词   [Normal 模式] [fzf 插件]
+" \gs                        在 Git 仓库搜索单词    [Normal 模式] [fzf 插件]
 " \ff                        在普通文件夹搜索文件   [Normal 模式] [fzf 插件]
-" \gg                        在 Git 仓库搜索文件    [Normal 模式] [fzf 插件]
-" \tt                        在 Git 变更列表搜索    [Normal 模式] [fzf 插件]
+" \gf                        在 Git 仓库搜索文件    [Normal 模式] [fzf 插件]
+" \gc                        在 Git 变更列表搜索    [Normal 模式] [fzf 插件]
 "
 " ---------- 跳转命令 ----------
 "
@@ -692,14 +694,21 @@ nmap <leader>gd :Gdiff<cr>
 " \gl                 调用 Tig 查看提交日志 [tig-explorer 插件]
 nmap <leader>gl :TigOpenCurrentFile<cr>
 
+" \ss                 搜索当前光标下的单词 [fzf 插件]
+nmap <leader>ss :Ag <c-r><c-w><cr>
+
+" \gs                 在 Git 仓库搜索单词 [fzf 插件]
+command! -bang -nargs=* AgInGitProject call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+nmap <leader>gs :AgInGitProject <c-r><c-w><cr>
+
 " \ff                 在普通文件夹搜索文件 [fzf 插件]
 nmap <leader>ff :Files<cr>
 
-" \gg                 在 Git 仓库搜索文件 [fzf 插件]
-nmap <leader>gg :GFiles<cr>
+" \gf                 在 Git 仓库搜索文件 [fzf 插件]
+nmap <leader>gf :GFiles<cr>
 
-" \tt                 在 Git 变更列表搜索 [fzf 插件]
-nmap <leader>tt :GFiles?<cr>
+" \gc                 在 Git 变更列表搜索 [fzf 插件]
+nmap <leader>gc :GFiles?<cr>
 
 " \fc                 格式化当前文件的代码 [prettier 插件]
 nmap <leader>fc :PrettierAsync<cr>
