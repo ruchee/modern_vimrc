@@ -1,3 +1,5 @@
+![Vim Ruchee](https://raw.github.com/ruchee/modern_vimrc/master/macvim.jpg "Vim Ruchee")
+
 ## Modern Vim configuration files for Vim 8+
 
 1. `brew install --cask macvim`
@@ -7,5 +9,7 @@
 5. `ln -s ~/vimrc/_vimrc ~/.vimrc`
 6. `ln -s ~/vimrc/vimfiles ~/.vim`
 7. `:PackUpdate`
+
+Good support for Rust / Go / PHP / Ruby / Elixir
 
 Enjoy :)

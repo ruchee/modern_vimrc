@@ -1,27 +1,27 @@
 " -----------------  Author: Ruchee
 " -----------------   Email: my@ruchee.com
-" -----------------    Date: 2023-04-10 15:23:32
+" -----------------    Date: 2023-05-21 10:59:45
 " -----------------   https://github.com/ruchee/modern_vimrc
 
 
 " ---------- Ctrl 系按键 ----------
 "
-" Ctrl + H                   切换左窗口               [Normal 模式可用]
-" Ctrl + J                   切换下窗口               [Normal 模式可用]
-" Ctrl + K                   切换上窗口               [Normal 模式可用]
-" Ctrl + L                   切换右窗口               [Normal 模式可用]
+" Ctrl + H                   切换左窗口               [Normal Mode]
+" Ctrl + J                   切换下窗口               [Normal Mode]
+" Ctrl + K                   切换上窗口               [Normal Mode]
+" Ctrl + L                   切换右窗口               [Normal Mode]
 
 " ---------- Leader 系按键 ----------
 "
-" \c                         复制至公共剪贴板         [仅选择模式]
-" \a                         复制所有至公共剪贴板     [Normal 模式可用]
-" \v                         从公共剪贴板粘贴         [全模式可用]
+" \c                         复制至公共剪贴板         [Select Mode]
+" \a                         复制所有至公共剪贴板     [Normal Mode]
+" \v                         从公共剪贴板粘贴         [All Mode]
 "
-" \rr                        一键编译 && 运行         [全模式可用]
-" \rb                        一键去除全部尾部空白     [全模式可用]
-" \rm                        一键去除全部 ^M 字符     [全模式可用]
-" \rt                        一键替换全部 Tab 为空格  [全模式可用]
-" \ra                        一键清理当前代码文件     [Normal 模式可用]
+" \rr                        一键编译 && 运行         [All Mode]
+" \rb                        一键去除全部尾部空白     [All Mode]
+" \rm                        一键去除全部 ^M 字符     [All Mode]
+" \rt                        一键替换全部 Tab 为空格  [All Mode]
+" \ra                        一键清理当前代码文件     [Normal Mode]
 "
 " \nt                        打开 NERDTree 文件树窗口
 " \tl                        打开/关闭 Tags 窗口
@@ -29,17 +29,17 @@
 " \ut                        打开/关闭 Undotree 文档编辑历史窗口
 " \fe                        打开/关闭文件编码窗口
 "
-" \be                        打开 BufExplorer 窗口    [独立显示] [Normal 模式可用]
-" \bs                        打开 BufExplorer 窗口    [分割显示] [Normal 模式可用]
-" \bv                        打开 BufExplorer 窗口    [边栏显示] [Normal 模式可用]
+" \be                        打开 BufExplorer 窗口    [独立显示] [Normal Mode]
+" \bs                        打开 BufExplorer 窗口    [分割显示] [Normal Mode]
+" \bv                        打开 BufExplorer 窗口    [边栏显示] [Normal Mode]
 "
-" \il                        显示/关闭对齐线          [Normal 模式可用]
-" \gi                        开启/关闭 GitGutter      [Normal 模式可用]
-" \gd                        打开 Git 文件对比模式    [Normal 模式可用]
-" \gl                        调用 Tig 查看提交日志    [Normal 模式可用]
+" \il                        显示/关闭对齐线          [Normal Mode]
+" \gi                        开启/关闭 GitGutter      [Normal Mode]
+" \gd                        打开 Git 文件对比模式    [Normal Mode]
+" \gl                        调用 Tig 查看提交日志    [Normal Mode]
 "
-" \bb                        按 = 号对齐代码          [Normal 模式可用]
-" \bn                        自定义对齐               [Normal 模式可用]
+" \bb                        按 = 号对齐代码          [Normal Mode]
+" \bn                        自定义对齐               [Normal Mode]
 "
 " \cc                        添加行注释               [NERD Commenter]
 " \cm                        添加块注释               [NERD Commenter]
@@ -53,10 +53,11 @@
 
 " ---------- 补全命令 ----------
 "
-" Ctrl + P                   缓冲区补全               [插入模式]
-" Ctrl + U                   调用 LSP 补全            [插入模式]
-" Tab键                      语法结构补全             [插入模式] [snipMate 插件]
-" Ctrl + Y + ,               HTML标签补全             [插入模式] [emmet 插件]
+" Ctrl + P                   缓冲区补全               [Insert Mode]
+" Ctrl + U                   调用 LSP 补全代码        [Insert Mode]
+" Ctrl + [                   调用 LSP 查看信息        [Normal Mode]
+" Tab键                      语法结构补全             [Insert Mode] [snipMate 插件]
+" Ctrl + Y + ,               HTML标签补全             [Insert Mode] [emmet 插件]
 
 " ---------- 格式化命令 ----------
 "
@@ -65,13 +66,13 @@
 " gg=G                       缩进整个文件
 " 行号G=行号G                缩进指定区间
 
-" u [小写]                   单步复原                 [非插入模式]
-" U [大写]                   整行复原                 [非插入模式]
-" Ctrl + R                   反撤消                   [非插入模式]
+" u [小写]                   单步复原                 [Not Insert Mode]
+" U [大写]                   整行复原                 [Not Insert Mode]
+" Ctrl + R                   反撤消                   [Not Insert Mode]
 "
-" \pcf                       格式化当前 PHP 文件              [Normal 模式] [php-cs-fixer 插件]
-" \pcd                       格式化当前目录下的所有 PHP 文件  [Normal 模式] [php-cs-fixer 插件]
-" \fc                        格式化当前文件的代码             [Normal 模式] [主要针对前端代码文件] [需要安装 prettier 可执行文件]
+" \pcf                       格式化当前 PHP 文件              [Normal Mode] [php-cs-fixer 插件]
+" \pcd                       格式化当前目录下的所有 PHP 文件  [Normal Mode] [php-cs-fixer 插件]
+" \fc                        格式化当前文件的代码             [Normal Mode] [主要针对前端代码文件] [需要安装 prettier 可执行文件]
 "
 " ---------- 查看命令 ----------
 "
@@ -90,20 +91,20 @@
 " //                         向后搜索     [PCRE 风格] [由 eregex 插件提供]
 " :%S/xx/yy/g                正则搜索替换 [PCRE 风格] [由 eregex 插件提供]
 "
-" Ctrl + P                   在当前工程目录搜索文件 [Normal 模式] [ctrlp 插件]
+" Ctrl + P                   在当前工程目录搜索文件 [Normal Mode] [ctrlp 插件]
 "
-" \ss                        在当前文件夹搜索单词   [Normal 模式] [fzf 插件]
-" \ff                        在当前文件夹搜索文件   [Normal 模式] [fzf 插件]
-" \gs                        在 Git 仓库搜索单词    [Normal 模式] [fzf 插件]
-" \gf                        在 Git 仓库搜索文件    [Normal 模式] [fzf 插件]
+" \ss                        在当前文件夹搜索单词   [Normal Mode] [fzf 插件]
+" \ff                        在当前文件夹搜索文件   [Normal Mode] [fzf 插件]
+" \gs                        在 Git 仓库搜索单词    [Normal Mode] [fzf 插件]
+" \gf                        在 Git 仓库搜索文件    [Normal Mode] [fzf 插件]
 "
 " ---------- 跳转命令 ----------
 "
 " Ctrl + ]                   转到函数定义           [ctags 跳转]
 " Ctrl + T                   返回调用函数           [ctags 跳转]
 
-" Ctrl + O                   跳到上一个编辑位置     [Normal 模式]
-" Ctrl + I                   跳回下一个编辑位置     [Normal 模式]
+" Ctrl + O                   跳到上一个编辑位置     [Normal Mode]
+" Ctrl + I                   跳回下一个编辑位置     [Normal Mode]
 
 " 0 or ^ or $                跳至 行首 or 第一个非空字符 or 行尾
 " %                          在匹配的括号间跳跃
@@ -169,9 +170,9 @@
 "
 " ---------- 便捷操作 ----------
 "
-" Ctrl + A                   将当前光标所在数字自增1        [Normal 模式可用]
-" Ctrl + X                   将当前光标所在数字自减1        [Normal 模式可用]
-" :g/^/m0                    将整个文件所有行排列顺序颠倒   [命令模式]
+" Ctrl + A                   将当前光标所在数字自增1        [Normal Mode]
+" Ctrl + X                   将当前光标所在数字自减1        [Normal Mode]
+" :g/^/m0                    将整个文件所有行排列顺序颠倒   [Command Mode]
 " m字符       and '字符      标记位置 and 跳转到标记位置
 " q字符 xxx q and @字符      录制宏   and 执行宏
 "
@@ -295,11 +296,7 @@ set tabstop=4
 au FileType scheme,racket,lisp,clojure,lfe,elixir,eelixir,ruby,eruby,coffee,slim,pug,scss set shiftwidth=2
 au FileType scheme,racket,lisp,clojure,lfe,elixir,eelixir,ruby,eruby,coffee,slim,pug,scss set tabstop=2
 
-" 修正 Rust 语言的部分快捷键 [需要安装 rust-analyzer、rust-src 才能正常工作]
-au FileType rust nmap <c-[> :LspHover<cr>
-
 " 修正 Go 语言的部分快捷键 [需要安装一堆工具才能正常工作，可在 Vim 里面执行 :GoInstallBinaries 命令完成安装，需要翻墙才能安装成功]
-au FileType go nmap <c-[> :GoInfo<cr>
 au FileType go nmap <c-]> :GoDef<cr>
 au FileType go nmap <c-t> <c-o>
 
@@ -635,19 +632,22 @@ vmap <c-]> g<c-]>
 " Ctrl + T            跳回原位置
 nmap <c-t> :pop<cr>
 
-" Ctrl + U            调用 LSP 补全
+" Ctrl + U            调用 LSP 补全代码
 imap <c-u> <Plug>(asyncomplete_force_refresh)
 
-" Ctrl + H            切换左窗口[Normal 模式]
+" Ctrl + [            调用 LSP 查看信息
+nmap <c-[> :LspHover<cr>
+
+" Ctrl + H            切换左窗口[Normal Mode]
 map <c-h> <c-w><c-h>
 
-" Ctrl + J            切换下窗口[Normal 模式]
+" Ctrl + J            切换下窗口[Normal Mode]
 map <c-j> <c-w><c-j>
 
-" Ctrl + K            切换上窗口[Normal 模式]
+" Ctrl + K            切换上窗口[Normal Mode]
 map <c-k> <c-w><c-k>
 
-" Ctrl + L            切换右窗口[Normal 模式]
+" Ctrl + L            切换右窗口[Normal Mode]
 map <c-l> <c-w><c-l>
 
 " \c                  复制至公共剪贴板
