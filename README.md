@@ -1,4 +1,4 @@
-![Vim Ruchee](https://raw.github.com/ruchee/modern_vimrc/main/macvim.jpg "Vim Ruchee")
+![Vim Ruchee](https://raw.github.com/ruchee/modern_vimrc/main/macvim.png "Vim Ruchee")
 
 ## Modern Vim configuration files for Vim 8+
 
