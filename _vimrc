@@ -1,6 +1,6 @@
 " -----------------  Author: Ruchee
 " -----------------   Email: my@ruchee.com
-" -----------------    Date: 2023-05-21 10:59:45
+" -----------------    Date: 2023-12-24 17:38:07
 " -----------------   https://github.com/ruchee/modern_vimrc
 
 
@@ -431,6 +431,191 @@ au FileType php,blade     set iskeyword=@,48-57,_,192-255
 au FileType ruby,eruby    set iskeyword=@,48-57,_,192-255,?,!
 au FileType css,scss,less set iskeyword=@,48-57,_,192-255,#
 au FileType nginx         set iskeyword=@,48-57,_,192-255
+
+
+" 针对部分语言添加字典补全
+au FileType c      call AddCDict()
+au FileType cpp    call AddCPPDict()
+au FileType rust   call AddRustDict()
+au FileType go     call AddGoDict()
+au FileType java   call AddJavaDict()
+au FileType lua    call AddLuaDict()
+au FileType perl   call AddPerlDict()
+au FileType php    call AddPHPDict()
+au FileType python call AddPythonDict()
+au FileType mysql  call AddMySQLDict()
+
+au FileType elixir,eelixir call AddElixirDict()
+au FileType ruby,eruby     call AddRubyDict()
+
+au FileType html,gohtmltmpl,eelixir,blade,volt,*.twig,htmldjango,jinja,eruby,jst call AddHTMLDict()
+au FileType smarty,mustache,handlebars,vue,jsx                                   call AddHTMLDict()
+au FileType css,scss,less                                                        call AddCSSDict()
+au FileType javascript,coffee,typescript,ls                                      call AddJavaScriptDict()
+
+au FileType slim,pug call AddHTMLDict()
+au FileType slim,pug call AddCSSDict()
+au FileType slim,pug call AddJavaScriptDict()
+
+au FileType Dockerfile     call AddDockerfileDict()
+au FileType docker-compose call AddDockerComposeDict()
+
+function AddCDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/c.txt
+    else
+        set dict+=~/.vim/dict/c.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddCPPDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/c.txt
+        set dict+=$VIM/vimfiles/dict/cpp.txt
+    else
+        set dict+=~/.vim/dict/c.txt
+        set dict+=~/.vim/dict/cpp.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddRustDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/rust.txt
+    else
+        set dict+=~/.vim/dict/rust.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddGoDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/go.txt
+    else
+        set dict+=~/.vim/dict/go.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddJavaDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/java.txt
+    else
+        set dict+=~/.vim/dict/java.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddElixirDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/elixir.txt
+    else
+        set dict+=~/.vim/dict/elixir.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddLuaDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/lua.txt
+        set dict+=$VIM/vimfiles/dict/love2d.txt
+    else
+        set dict+=~/.vim/dict/lua.txt
+        set dict+=~/.vim/dict/love2d.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddPerlDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/perl.txt
+    else
+        set dict+=~/.vim/dict/perl.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddPHPDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/php.txt
+    else
+        set dict+=~/.vim/dict/php.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddPythonDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/python.txt
+    else
+        set dict+=~/.vim/dict/python.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddRubyDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/ruby.txt
+    else
+        set dict+=~/.vim/dict/ruby.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddMySQLDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/mysql.txt
+    else
+        set dict+=~/.vim/dict/mysql.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddCSSDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/css.txt
+    else
+        set dict+=~/.vim/dict/css.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddJavaScriptDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/javascript.txt
+    else
+        set dict+=~/.vim/dict/javascript.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddHTMLDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/html.txt
+    else
+        set dict+=~/.vim/dict/html.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddDockerfileDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/Dockerfile.txt
+    else
+        set dict+=~/.vim/dict/Dockerfile.txt
+    endif
+    set complete+=k
+endfunction
+
+function AddDockerComposeDict()
+    if g:isWIN
+        set dict+=$VIM/vimfiles/dict/docker-compose.txt
+    else
+        set dict+=~/.vim/dict/docker-compose.txt
+    endif
+    set complete+=k
+endfunction
 
 
 " 开启部分语法高亮的非默认特性
