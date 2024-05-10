@@ -1,6 +1,6 @@
 " -----------------  Author: Ruchee
 " -----------------   Email: my@ruchee.com
-" -----------------    Date: 2024-05-10 10:32:51
+" -----------------    Date: 2024-05-10 10:55:24
 " -----------------   https://github.com/ruchee/modern_vimrc
 
 
@@ -872,7 +872,7 @@ nmap <leader>il :IndentLinesToggle<cr>
 nmap <leader>fe :FencView<cr>
 
 " \gb                 查看 Git Blame [fugitive 插件]
-nmap <leader>gd :Git blame<cr>
+nmap <leader>gb :Git blame<cr>
 
 " \gi                 开启或关闭 GitGutter [GitGutter 插件]
 nmap <leader>gi :GitGutterToggle<cr>:GitGutterSignsToggle<cr>:GitGutterLineHighlightsToggle<cr>
