@@ -1,6 +1,6 @@
 " -----------------  Author: Ruchee
 " -----------------   Email: my@ruchee.com
-" -----------------    Date: 2023-12-24 17:38:07
+" -----------------    Date: 2024-05-10 10:32:51
 " -----------------   https://github.com/ruchee/modern_vimrc
 
 
@@ -34,6 +34,7 @@
 " \bv                        打开 BufExplorer 窗口    [边栏显示] [Normal Mode]
 "
 " \il                        显示/关闭对齐线          [Normal Mode]
+" \gb                        查看 Git Blame           [Normal Mode]
 " \gi                        开启/关闭 GitGutter      [Normal Mode]
 " \gd                        打开 Git 文件对比模式    [Normal Mode]
 " \gl                        调用 Tig 查看提交日志    [Normal Mode]
@@ -869,6 +870,9 @@ nmap <leader>il :IndentLinesToggle<cr>
 
 " \fe                 打开文件编码窗口，在右侧栏显示 [FencView 插件]
 nmap <leader>fe :FencView<cr>
+
+" \gb                 查看 Git Blame [fugitive 插件]
+nmap <leader>gd :Git blame<cr>
 
 " \gi                 开启或关闭 GitGutter [GitGutter 插件]
 nmap <leader>gi :GitGutterToggle<cr>:GitGutterSignsToggle<cr>:GitGutterLineHighlightsToggle<cr>
