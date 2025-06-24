@@ -2,7 +2,7 @@
 
 ## Modern Vim configuration files for Vim 8+
 
-1. `brew install --cask macvim`
+1. `brew install --cask macvim-app`
 2. `brew install git git-delta universal-ctags fzf the_silver_searcher ripgrep`
 3. `ln -s /Applications/MacVim.app/Contents/bin/* /usr/local/bin`
 4. `git clone https://github.com/ruchee/modern_vimrc.git ~/vimrc`
