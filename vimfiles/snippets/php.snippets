@@ -74,6 +74,8 @@ snippet f.      用于接口的方法声明
 	function ${1}(${2})${3};${0}
 snippet ff      匿名函数（不换行）
 	function (${1})${2} {${0}}
+snippet fn      匿名函数（简化版）
+	fn(${1}) => ${0}
 snippet ffu     带 use 子句的匿名函数
 	function (${1})${2} use (${3}) {${0}};
 snippet abf     用于声明抽象方法
@@ -191,6 +193,15 @@ snippet cs      case
 snippet def     default
 	default:
 	    ${0}
+snippet ma      match
+	match (${1}) {
+	    ${2} => ${0},
+	    default => ''
+	};
+snippet em      enum
+	enum ${1}: ${2} {
+	    case ${3} = ${0};
+	}
 snippet de      设定代码执行指令 [无大括号]
 	declare(${0});
 snippet de.     设定代码执行指令 [有大括号]
@@ -361,6 +372,8 @@ snippet _a      array
 	array${0}
 snippet _o      object
 	object${0}
+snippet _mi     mixed
+	mixed${0}
 snippet _it     iterable（可迭代类型）
 	iterable${0}
 #### 常用函数 ####
@@ -490,6 +503,8 @@ snippet st      静态属性/延迟绑定
 	static ${0}
 snippet con     常量属性
 	const ${0}
+snippet ro      只读
+	readonly ${0}
 snippet go      跳转
 	goto ${0}
 snippet co      继续
@@ -535,5 +550,7 @@ snippet ?       三元运算符
 	$${1} ?${2}: ${0};
 snippet <       太空船操作符（比较操作符）
 	<=> ${0}
+snippet |       管道操作符
+	|> ${0}
 snippet .       =>
 	=> ${0}
